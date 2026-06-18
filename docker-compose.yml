@@ -15,10 +15,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: takimoto
       MYSQL_DATABASE: takimoto_library
       MYSQL_USER: takimoto_user
-      MYSQL_PASSWORD: takimoto_password
+      MYSQL_PASSWORD: takimoto
       TZ: Asia/Tokyo
     command:
       - --character-set-server=utf8mb4
