@@ -23,6 +23,9 @@
         "test": "pest"
     },
     "config": {
+        "platform": {
+            "php": "8.3.31"
+        },
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
