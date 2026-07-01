@@ -4,6 +4,12 @@ services:
     container_name: takimoto_library_app
     ports:
       - "8000:8000"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: takimoto_library
+      DB_USERNAME: takimoto_user
+      DB_PASSWORD: takimoto_password
     volumes:
       - .:/var/www/html
     depends_on:
@@ -18,7 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: takimoto
       MYSQL_DATABASE: takimoto_library
       MYSQL_USER: takimoto_user
-      MYSQL_PASSWORD: takimoto
+      MYSQL_PASSWORD: takimoto_password
       TZ: Asia/Tokyo
     command:
       - --character-set-server=utf8mb4

@@ -18,6 +18,13 @@ use App\Controllers\LoanController;
 use App\Controllers\StudentController;
 use App\Core\Router;
 
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+if ($path === '/') {
+    require __DIR__ . '/home.php';
+    exit;
+}
+
 header('Content-Type: application/json; charset=utf-8');
 
 $router = new Router();
