@@ -1,12 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Models\Loan;
-
-require_once __DIR__ . '/_view_bootstrap.php';
-
-$showOverdue = ($_GET['status'] ?? '') === 'overdue';
-$loans = $showOverdue ? Loan::overdue() : Loan::all();
+require_once __DIR__ . '/_helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -17,13 +12,13 @@ $loans = $showOverdue ? Loan::overdue() : Loan::all();
 <body>
     <header>
         <h1>貸し出し履歴</h1>
-        <p><a href="home.php">トップへ戻る</a></p>
+        <p><a href="/">トップへ戻る</a></p>
     </header>
 
     <nav>
         <ul>
-            <li><a href="loans.php">すべて</a></li>
-            <li><a href="loans.php?status=overdue">延滞中のみ</a></li>
+            <li><a href="/loans">すべて</a></li>
+            <li><a href="/loans?status=overdue">延滞中のみ</a></li>
         </ul>
     </nav>
 

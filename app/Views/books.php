@@ -1,14 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Models\Book;
-
-require_once __DIR__ . '/_view_bootstrap.php';
-
-$books = Book::all([
-    'status' => $_GET['status'] ?? '',
-    'keyword' => $_GET['keyword'] ?? '',
-]);
+require_once __DIR__ . '/_helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -19,14 +12,14 @@ $books = Book::all([
 <body>
     <header>
         <h1>本一覧</h1>
-        <p><a href="home.php">トップへ戻る</a></p>
+        <p><a href="/">トップへ戻る</a></p>
     </header>
 
     <?php renderMessage(); ?>
 
     <section>
         <h2>検索</h2>
-        <form action="books.php" method="get">
+        <form action="/books" method="get">
             <label>
                 キーワード
                 <input type="text" name="keyword" value="<?= h($_GET['keyword'] ?? '') ?>">
