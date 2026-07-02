@@ -8,7 +8,15 @@ abstract class Controller
     protected function jsonResponse(array $data, int $statusCode = 200): void
     {
         http_response_code($statusCode);
+        header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    protected function render(string $view, array $data = []): void
+    {
+        extract($data, EXTR_SKIP);
+
+        require __DIR__ . '/../Views/' . $view . '.php';
     }
 
     protected function requestBody(): array
