@@ -1,31 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Models\Book;
-use App\Models\Loan;
-use App\Models\Student;
-
-require_once __DIR__ . '/_view_bootstrap.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $studentId = (int) requiredValue($_POST, 'student_id');
-    $bookId = (int) requiredValue($_POST, 'book_id');
-
-    if ($studentId <= 0 || $bookId <= 0) {
-        redirectTo('borrow.php', ['error' => '学生と本を選択してください']);
-    }
-
-    $result = Loan::borrow($studentId, $bookId);
-
-    if (!$result['success']) {
-        redirectTo('borrow.php', ['error' => $result['message']]);
-    }
-
-    redirectTo('borrow.php', ['message' => '本を貸し出しました']);
-}
-
-$students = Student::all();
-$books = Book::all(['status' => 'available']);
+require_once __DIR__ . '/_helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -36,14 +12,14 @@ $books = Book::all(['status' => 'available']);
 <body>
     <header>
         <h1>貸し出し</h1>
-        <p><a href="home.php">トップへ戻る</a></p>
+        <p><a href="/">トップへ戻る</a></p>
     </header>
 
     <?php renderMessage(); ?>
 
     <section>
         <h2>本を借りる</h2>
-        <form action="borrow.php" method="post">
+        <form action="/borrow" method="post">
             <p>
                 <label>
                     学生

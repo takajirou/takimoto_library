@@ -1,35 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Models\Student;
-
-require_once __DIR__ . '/_view_bootstrap.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = requiredValue($_POST, 'name');
-    $grade = requiredValue($_POST, 'grade');
-    $studentId = requiredValue($_POST, 'student_id');
-    $email = requiredValue($_POST, 'email');
-
-    if ($name === '' || $grade === '' || $studentId === '' || $email === '') {
-        redirectTo('students.php', ['error' => '未入力の項目があります']);
-    }
-
-    try {
-        Student::create([
-            'name' => $name,
-            'grade' => $grade,
-            'student_id' => $studentId,
-            'email' => $email,
-        ]);
-    } catch (\Throwable $exception) {
-        redirectTo('students.php', ['error' => '学生を登録できませんでした']);
-    }
-
-    redirectTo('students.php', ['message' => '学生を登録しました']);
-}
-
-$students = Student::all();
+require_once __DIR__ . '/_helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -40,14 +12,14 @@ $students = Student::all();
 <body>
     <header>
         <h1>学生管理</h1>
-        <p><a href="home.php">トップへ戻る</a></p>
+        <p><a href="/">トップへ戻る</a></p>
     </header>
 
     <?php renderMessage(); ?>
 
     <section>
         <h2>学生登録</h2>
-        <form action="students.php" method="post">
+        <form action="/students" method="post">
             <p>
                 <label>
                     名前

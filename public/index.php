@@ -8,6 +8,7 @@ require_once __DIR__ . '/../app/Controllers/HealthController.php';
 require_once __DIR__ . '/../app/Controllers/BookController.php';
 require_once __DIR__ . '/../app/Controllers/StudentController.php';
 require_once __DIR__ . '/../app/Controllers/LoanController.php';
+require_once __DIR__ . '/../app/Controllers/PageController.php';
 require_once __DIR__ . '/../app/Models/Book.php';
 require_once __DIR__ . '/../app/Models/Student.php';
 require_once __DIR__ . '/../app/Models/Loan.php';
@@ -15,24 +16,29 @@ require_once __DIR__ . '/../app/Models/Loan.php';
 use App\Controllers\BookController;
 use App\Controllers\HealthController;
 use App\Controllers\LoanController;
+use App\Controllers\PageController;
 use App\Controllers\StudentController;
 use App\Core\Router;
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-if ($path === '/') {
-    require __DIR__ . '/home.php';
-    exit;
-}
-
-header('Content-Type: application/json; charset=utf-8');
-
 $router = new Router();
 
+$pageController = new PageController();
 $healthController = new HealthController();
 $bookController = new BookController();
 $studentController = new StudentController();
 $loanController = new LoanController();
+
+$router->get('/', [$pageController, 'home']);
+$router->get('/books', [$pageController, 'books']);
+$router->get('/borrow', [$pageController, 'borrow']);
+$router->post('/borrow', [$pageController, 'borrow']);
+$router->get('/return', [$pageController, 'return']);
+$router->post('/return', [$pageController, 'return']);
+$router->get('/students', [$pageController, 'students']);
+$router->post('/students', [$pageController, 'students']);
+$router->get('/loans', [$pageController, 'loans']);
+$router->get('/admin-books', [$pageController, 'adminBooks']);
+$router->post('/admin-books', [$pageController, 'adminBooks']);
 
 $router->get('/api/health', [$healthController, 'index']);
 
