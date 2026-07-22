@@ -56,6 +56,18 @@ Adminerの入力内容:
 
 初期SQLは `database/init/001_create_tables.sql` にあります。
 
+## テスト用DB
+
+テストはアプリ用DBとは別の `takimoto_library_test` を使用します。PHPUnit/Pest実行時は、`phpunit.xml` がこのDB名を自動で指定します。
+
+Dockerを新規起動した場合は `database/init/002_create_test_tables.sql` により、本番用と同じテーブルが自動作成されます。既にMySQLのボリュームを作成済みの場合は、次のコマンドでテスト用DBだけを追加できます。
+
+```bash
+docker compose exec -T mysql mysql -uroot -ptakimoto < database/init/002_create_test_tables.sql
+```
+
+接続情報が必要な場合は、`.env.testing.example` を参考にしてください。
+
 ## DBを作り直したい場合
 
 テーブル定義を変えて最初から作り直す場合は、MySQLのボリュームも削除します。
@@ -64,4 +76,3 @@ Adminerの入力内容:
 docker compose down -v
 docker compose up -d
 ```
-
