@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: PHP tests
+    name: PHP test
     runs-on: ubuntu-latest
 
     services:
@@ -43,7 +43,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: "8.3"
           extensions: pdo_mysql
           coverage: none
 
