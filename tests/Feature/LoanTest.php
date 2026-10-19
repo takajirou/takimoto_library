@@ -9,7 +9,7 @@ test('貸出すると貸出記録が作成され、本が貸出中になる', fu
 
     $result = Loan::borrow($student['id'], $book['id']);
 
-    expect($result['success'])->toBeTrue()
+    expect($result['succes'])->toBeTrue()
         ->and($result['loan'])->toMatchArray([
             'student_id' => $student['id'],
             'book_id' => $book['id'],
