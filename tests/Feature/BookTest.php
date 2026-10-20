@@ -72,7 +72,7 @@ test('存在しない本は更新できない', function () {
     ]);
 
     expect($updated)->toBeNull();
-});
+}); 
 
 test('本を削除でき、存在しない本は削除できない', function () {
     $book = $this->createBook();
